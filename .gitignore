@@ -1,0 +1,13 @@
+# Lecturer-only checkouts, lesson branches, solutions, and working files.
+# Never force-add this directory to the student-facing repository.
+_teacher/
+
+# Local editor and operating-system files.
+.DS_Store
+Thumbs.db
+*.user
+*.suo
+*.userprefs
+
+# Temporary logs produced by local checks.
+*.log
