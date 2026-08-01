@@ -19,6 +19,20 @@ if ($trackedTeacherFiles.Count -gt 0) {
     throw 'Student-safety check failed.'
 }
 
+$trackedPaths = @(& git -C $repositoryRoot ls-files)
+$sensitivePaths = @(
+    $trackedPaths | Where-Object {
+        $_ -match '(^|/)Teacher-Additions(/|$)' -or
+        $_ -match '(^|/)users\.json$' -or
+        $_ -match '(^|/)Login-Version(/|$)'
+    }
+)
+
+if ($sensitivePaths.Count -gt 0) {
+    $sensitivePaths | ForEach-Object { Write-Error "Private Assessment 2 material is tracked publicly: $_" }
+    throw 'Student-safety check failed.'
+}
+
 $teacherRoot = Join-Path $repositoryRoot '_teacher'
 if (Test-Path -LiteralPath $teacherRoot) {
     & git -C $repositoryRoot check-ignore -q -- '_teacher'
@@ -32,4 +46,4 @@ if (-not $readme.Contains('https://github.com/MonoGame/Starter-Kit-3D-Platformer
     throw 'README.md no longer links to the official upstream repository.'
 }
 
-Write-Host 'Student-safety check passed: no _teacher files are tracked.'
+Write-Host 'Student-safety check passed: no lecturer-only or login-addition files are tracked.'

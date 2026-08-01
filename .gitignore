@@ -25,3 +25,9 @@ obj/
 
 # Blender backup files.
 *.blend1
+
+# Python/RPS local state.
+__pycache__/
+*.py[cod]
+.venv/
+users.json
