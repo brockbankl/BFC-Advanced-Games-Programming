@@ -1,12 +1,12 @@
 # BFC Advanced Games Programming: MonoGame 3D Platformer
 
-This is the course landing repository for our Level 6 advanced games programming work. We will use MonoGame's official 3D platformer starter kit as the base for graphics, particle, HLSL shader, and AI exercises.
+This is the stable course copy for our Level 6 advanced games programming work. It contains a tested snapshot of MonoGame's official 3D platformer starter kit, which we will use for graphics, particle, HLSL shader, and AI exercises.
 
 The original starter kit belongs to the MonoGame project. Get it from:
 
 **[MonoGame/Starter-Kit-3D-Platformer](https://github.com/MonoGame/Starter-Kit-3D-Platformer)**
 
-Do not wait for a prepared copy unless your lecturer specifically tells you to. The steps below take you from a college PC with Visual Studio Code to a running copy of the original game.
+Use this course repository for practical work so that later changes to MonoGame's upstream repository cannot break the teaching baseline. The steps below take you from a college PC with Visual Studio Code to a running copy.
 
 ## What you need
 
@@ -23,12 +23,12 @@ The **MonoGame for VS Code** community extension and the MonoGame project templa
 
 ## 1. Choose a folder with no spaces
 
-This matters. At the upstream revision used for the course, the Content Builder command fails if any folder in the project path contains a space.
+This matters. At the upstream revision used for the course, the Content Builder command fails if any folder in the project path contains a space. Our pinned course copy includes a compatibility fix, but a short no-spaces path remains the supported college setup and avoids problems in other content tools.
 
 Use a short location such as:
 
 ```text
-C:\Users\your-college-login\BFCMonoGame\Starter-Kit-3D-Platformer
+C:\Users\your-college-login\BFCMonoGame\BFC-Advanced-Games-Programming
 ```
 
 Avoid locations such as:
@@ -61,7 +61,7 @@ You need to see a line beginning with `9.0` or a later compatible SDK such as `1
 
 If `dotnet` is not recognised, or only .NET 8 and earlier are listed, stop and tell your lecturer or college IT. Installing Visual Studio Code's **.NET Install Tool** extension does not guarantee that the full SDK needed to build the game is installed.
 
-## 4. Download the original game
+## 4. Download the course copy
 
 ### Recommended: clone with Visual Studio Code
 
@@ -73,7 +73,7 @@ Cloning keeps the source's Git history and makes later updates easier.
 4. Paste:
 
    ```text
-   https://github.com/MonoGame/Starter-Kit-3D-Platformer.git
+   https://github.com/brockbankl/BFC-Advanced-Games-Programming.git
    ```
 
 5. Choose a no-spaces parent folder such as `C:\Users\your-college-login\BFCMonoGame`.
@@ -84,7 +84,7 @@ If **Git: Clone** is unavailable or reports that Git is missing, use the ZIP met
 
 ### Fallback: download a ZIP in the browser
 
-1. Open the [official starter kit page](https://github.com/MonoGame/Starter-Kit-3D-Platformer).
+1. Open the [BFC course repository](https://github.com/brockbankl/BFC-Advanced-Games-Programming).
 2. Select **Code**, then **Download ZIP**.
 3. Extract the ZIP to a no-spaces location.
 4. In Visual Studio Code, select **File > Open Folder** and open the extracted folder.
@@ -197,14 +197,14 @@ Confirm that HLSL Tools by Tim Jones is enabled for this workspace, then reopen 
 
 ## Version used to prepare this module
 
-The teaching baseline was checked against upstream commit [`985b84f1154714fb68eb295579cbd10ec16694c6`](https://github.com/MonoGame/Starter-Kit-3D-Platformer/commit/985b84f1154714fb68eb295579cbd10ec16694c6), retrieved on 1 August 2026. The public upstream `main` branch can change, so tell your lecturer if the files or instructions no longer match.
+This repository includes the teaching baseline checked against upstream commit [`985b84f1154714fb68eb295579cbd10ec16694c6`](https://github.com/MonoGame/Starter-Kit-3D-Platformer/commit/985b84f1154714fb68eb295579cbd10ec16694c6), retrieved on 1 August 2026. Upstream `main` can continue changing without altering this cohort's copy.
 
 For background, see MonoGame's official [Visual Studio Code setup guide](https://docs.monogame.net/articles/getting_started/2_choosing_your_ide_vscode.html) and [Content Builder documentation](https://docs.monogame.net/articles/getting_started/content_pipeline/content_builder_project.html).
 
 ## Credits and licence
 
-The starter kit is maintained by the MonoGame project, based on Kenney's original Godot starter kit. Its source is MIT licensed, and its included 2D sprites, 3D models, and sound effects are CC0 licensed. See the upstream repository's [`LICENSE.md`](https://github.com/MonoGame/Starter-Kit-3D-Platformer/blob/main/LICENSE.md) for the complete terms.
+The starter kit is maintained by the MonoGame project, based on Kenney's original Godot starter kit. Its source is MIT licensed, and its included 2D sprites, 3D models, and sound effects are CC0 licensed. This course repository preserves the upstream [`LICENSE.md`](LICENSE.md); the [official repository](https://github.com/MonoGame/Starter-Kit-3D-Platformer) remains the source of the original project.
 
-This course repository deliberately does not redistribute the starter-kit source or future lecturer solutions. Students obtain the official base from the link above.
+This public repository contains only the pinned starter kit and student-safe course material. Lecturer solutions and in-development resources are kept in a separate private repository.
 
 Teaching staff should use [the local teacher workflow](docs/TEACHER_WORKFLOW.md) before creating lesson or solution copies.

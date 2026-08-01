@@ -11,3 +11,17 @@ Thumbs.db
 
 # Temporary logs produced by local checks.
 *.log
+
+# MonoGame/.NET build output.
+bin/
+obj/
+*.xnb
+.artifacts/
+/Content/Output/
+
+# IDE-generated files.
+.vs/
+*.userinfo
+
+# Blender backup files.
+*.blend1
