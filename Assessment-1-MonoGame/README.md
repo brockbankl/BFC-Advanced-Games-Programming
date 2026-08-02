@@ -21,23 +21,27 @@ Use this course repository for practical work so that later changes to MonoGame'
 
 The **MonoGame for VS Code** community extension and the MonoGame project templates are useful when creating traditional MonoGame projects, but they are not required to build this starter kit. This kit uses MonoGame 3.8.5's newer Content Builder project.
 
-## 1. Choose a folder with no spaces
+## 1. Use `Documents\projects` on a college PC
 
-This matters. At the upstream revision used for the course, the Content Builder command fails if any folder in the project path contains a space. Our pinned course copy includes a compatibility fix, but a short no-spaces path remains the supported college setup and avoids problems in other content tools.
+> **College PC requirement**
+>
+> Clone or extract the project inside a folder named `projects` in your Windows `Documents` folder. The college debugger may refuse to run game files stored elsewhere, even when the project builds successfully.
 
-Use a short location such as:
-
-```text
-C:\Users\your-college-login\BFCMonoGame\BFC-Advanced-Games-Programming
-```
-
-Avoid locations such as:
+Use this parent folder:
 
 ```text
-OneDrive - College Name\Games Programming\Starter Kit
+C:\Users\your-college-login\Documents\projects
 ```
 
-If your Windows user-profile folder itself contains a space, ask your lecturer which no-spaces college drive or folder to use before continuing.
+The completed repository path should look like:
+
+```text
+C:\Users\your-college-login\Documents\projects\BFC-Advanced-Games-Programming
+```
+
+Create the `projects` folder in File Explorer before cloning or extracting the download if it does not already exist. Do not use Desktop, Downloads, a USB drive, OneDrive, or another convenient-looking folder on a college PC. This location rule comes from the college configuration rather than MonoGame, but the debugger is regrettably unmoved by that distinction.
+
+The path also avoids spaces, which helps the starter kit's content tools. If your Windows `Documents` folder is redirected or you cannot create `Documents\projects`, stop and ask your lecturer before continuing.
 
 ## 2. Install the Visual Studio Code extensions
 
@@ -76,7 +80,7 @@ Cloning keeps the source's Git history and makes later updates easier.
    https://github.com/brockbankl/BFC-Advanced-Games-Programming.git
    ```
 
-5. Choose a no-spaces parent folder such as `C:\Users\your-college-login\BFCMonoGame`.
+5. Choose `C:\Users\your-college-login\Documents\projects` as the parent folder.
 6. Select **Open** when cloning finishes.
 7. In the new repository window, select **File > Open Folder** and open `Assessment-1-MonoGame`.
 8. If asked whether you trust the authors of the files, confirm that you trust the course repository and its credited MonoGame source.
@@ -87,7 +91,7 @@ If **Git: Clone** is unavailable or reports that Git is missing, use the ZIP met
 
 1. Open the [BFC course repository](https://github.com/brockbankl/BFC-Advanced-Games-Programming).
 2. Select **Code**, then **Download ZIP**.
-3. Extract the ZIP to a no-spaces location.
+3. Extract the ZIP inside `C:\Users\your-college-login\Documents\projects`.
 4. In Visual Studio Code, select **File > Open Folder** and open the extracted `Assessment-1-MonoGame` folder.
 
 The correct Assessment 1 folder contains `Platformer3D.slnx`, `Source`, `Content`, and `DesktopGL`. Do not open only `Source`, and do not leave the module repository root open when you are trying to run the game.
@@ -159,7 +163,17 @@ The main areas we will use are:
 
 ### `'C:\part of the path' is not recognised as a command`
 
-The project is in a folder containing spaces. Move or clone the entire repository to a no-spaces path, reopen that folder in Visual Studio Code, and build again.
+The project is in an unsupported location or a path containing spaces. Move or clone the entire repository into `C:\Users\your-college-login\Documents\projects`, reopen `Assessment-1-MonoGame` in Visual Studio Code, and build again.
+
+### The project builds but the debugger will not start the game
+
+Check the full folder path first. On a college PC, the repository must be somewhere inside:
+
+```text
+C:\Users\your-college-login\Documents\projects
+```
+
+Move or clone it there, reopen `Assessment-1-MonoGame` in Visual Studio Code, and try `F5` again. If it still fails, keep the full error visible and report the PC number to your lecturer.
 
 ### `project.assets.json not found` for the Content project
 
