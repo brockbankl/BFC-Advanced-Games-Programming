@@ -1,6 +1,6 @@
 # Teacher workflow
 
-The repository root is deliberately student-safe. Everything under `_teacher/` is ignored by the outer Git repository and must remain unpublished.
+The repository root is student-safe. Everything under `_teacher/` is ignored by the outer Git repository and must remain unpublished.
 
 ## Local layout
 
@@ -58,4 +58,4 @@ git status --short
 
 Also review the complete staged diff before committing. Never use `git add -f _teacher`, and never make the outer repository's ignore rule narrower to expose a single lesson file. Move genuinely student-facing material out of `_teacher` explicitly and review it first.
 
-Repository name and visibility should be chosen deliberately before creating the GitHub remote. A public student guide and a private solution repository are safer than mixing both audiences in branches of one repository.
+Choose the repository name and visibility before creating the GitHub remote. A public student guide and a private solution repository are safer than mixing both audiences in one repository.

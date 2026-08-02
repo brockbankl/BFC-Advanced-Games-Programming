@@ -41,7 +41,7 @@ The completed repository path should look like:
 C:\Users\your-college-login\Documents\projects\BFC-Advanced-Games-Programming
 ```
 
-Create the `projects` folder in File Explorer before cloning or extracting the download if it does not already exist. Do not use Desktop, Downloads, a USB drive, OneDrive, or another convenient-looking folder on a college PC. This location rule comes from the college configuration rather than MonoGame, but the debugger is regrettably unmoved by that distinction.
+Create the `projects` folder in File Explorer before cloning or extracting the download if it does not already exist. Do not use Desktop, Downloads, a USB drive, OneDrive, or another convenient-looking folder on a college PC. This is a college restriction, not a MonoGame one. I do not know why either, but the debugger will not negotiate with us.
 
 The path also avoids spaces, which helps the starter kit's content tools. If your Windows `Documents` folder is redirected or you cannot create `Documents\projects`, stop and ask your lecturer before continuing.
 
@@ -171,7 +171,7 @@ If your terminal is at the module repository root rather than inside `Assessment
 dotnet run --project ./Assessment-1-MonoGame/WindowsDX/Platformer3D.csproj
 ```
 
-Check `Get-Location` whenever you have several copies or branches of the project. A correct-looking relative command can still launch the wrong copy if the terminal is standing in the wrong folder. Computers are very obedient in this particularly unhelpful way.
+Check `Get-Location` whenever you have several copies or branches of the project. A correct-looking relative command can still launch the wrong copy if the terminal is in the wrong folder. It is quite easy to test the wrong copy without noticing.
 
 ### Optional method: F5
 
@@ -182,7 +182,7 @@ On a personal computer, or if the college configuration permits it:
 3. Select **WindowsDX** on Windows or **DesktopGL** on macOS/Linux.
 4. Press `F5`.
 
-Opening a C# file and selecting a small **Run** button is not reliable for this multi-project game. Some college PCs may also hide or block the F5/debug route entirely. Use the integrated-terminal command above; it builds the same project and is the supported fallback, not a lesser form of wizardry.
+Opening a C# file and selecting a small **Run** button is not reliable for this multi-project game. Some college PCs may also hide or block the F5/debug route entirely. Use the integrated-terminal command above. It builds the same project, so you are not missing anything.
 
 ### Useful commands at a glance
 
@@ -273,7 +273,7 @@ dotnet build ./WindowsDX/Platformer3D.csproj
 
 ### `3DPlatformer.exe` is being used by another process
 
-The game is still running, so Windows has locked the executable while the build is trying to replace it. Close the game window or return to the terminal that launched it and press `Ctrl+C`, then run the build or launch command again. Do not start several copies and hope they reach a peaceful agreement.
+The game is still running, so Windows has locked the executable while the build is trying to replace it. Close the game window or return to the terminal that launched it and press `Ctrl+C`, then run the build or launch command again. Check that you have not left another copy running.
 
 ### NuGet download or restore errors
 
