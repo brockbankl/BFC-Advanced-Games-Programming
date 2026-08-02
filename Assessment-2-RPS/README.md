@@ -1,16 +1,16 @@
-# Assessment 2: Networked Rock–Paper–Scissors
+# Assessment 2: Networked Rock-Paper-Scissors
 
 > [!CAUTION]
 > **Assessment 2 has not been released. Do not start this work yet.** This is draft teaching material and may be replaced or substantially changed before it is introduced in class.
 
-This folder contains an early login-free version of the Python Rock–Paper–Scissors project that will eventually support the online multiplayer part of Advanced Games Programming.
+This folder contains an early login-free version of the Python Rock-Paper-Scissors project that will eventually support the online multiplayer part of Advanced Games Programming.
 
 When released, the exercise will separate the application into:
 
 - `client.py`: Pygame interface and player input.
 - `network.py`: client socket/network layer.
 - `server.py`: authoritative server, matchmaking, and connection handling.
-- `game.py`: shared Rock–Paper–Scissors game state.
+- `game.py`: shared Rock-Paper-Scissors game state.
 
 Authentication and registration are intentionally **not** part of this student starter. A rudimentary login system will be introduced separately as a lecturer-led extension after the basic client/network/server flow is understood.
 

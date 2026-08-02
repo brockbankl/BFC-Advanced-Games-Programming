@@ -2,14 +2,14 @@
 
 This repository contains the two practical strands for Advanced Games Programming (AGP).
 
-The module begins by examining the contemporary games market: how audiences are distributed across PC, console, mobile, and other platforms, and how the meaning of "market share" changes when it is measured by revenue, active users, hardware sales, or play time. That evidence leads into the technical and commercial case for reaching more than one platform. Assessment 1 then uses MonoGame—a cross-platform games framework—to investigate how that goal affects rendering, effects, performance, and optimisation.
+The module begins by examining the current games market: how audiences are split across PC, console, mobile, and other platforms, and how the meaning of "market share" changes when we measure revenue, active users, hardware sales, or play time. That evidence leads into the technical and commercial case for reaching more than one platform. Assessment 1 then uses MonoGame, a cross-platform games framework, to investigate how that affects rendering, effects, performance, and optimisation.
 
 ## Repository structure
 
 | Folder | Status | Purpose |
 | --- | --- | --- |
 | [`Assessment-1-MonoGame`](Assessment-1-MonoGame/) | **Current** | Cross-platform 3D MonoGame work: HLSL shaders, particles, rendering, profiling, and optimisation. |
-| [`Assessment-2-RPS`](Assessment-2-RPS/) | **Not released** | Python Rock–Paper–Scissors networking work. This material is still being prepared and may change. |
+| [`Assessment-2-RPS`](Assessment-2-RPS/) | **Not released** | Python Rock-Paper-Scissors networking work. This material is still being prepared and may change. |
 
 ## Start here: Assessment 1
 
