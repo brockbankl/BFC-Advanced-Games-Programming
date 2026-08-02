@@ -8,6 +8,8 @@ The original starter kit belongs to the MonoGame project. Get it from:
 
 Use this course repository for practical work so that later changes to MonoGame's upstream repository cannot break the teaching baseline. The steps below take you from a college PC with Visual Studio Code to a running copy.
 
+For a guided route through the official project materials, videos, MonoGame concepts, content workflow, and 3D graphics documentation, see [Official MonoGame and 3D Platformer Resources](docs/OFFICIAL_MONOGAME_RESOURCES.md).
+
 ## What you need
 
 - A college Windows PC or a personal Windows, macOS, or Linux computer with Visual Studio Code.

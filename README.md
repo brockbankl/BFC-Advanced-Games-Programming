@@ -20,6 +20,8 @@ During the first part of the module, work only in [`Assessment-1-MonoGame`](Asse
 3. Complete the .NET restore and DesktopGL build checks before the first practical.
 4. Follow the version-control and submission instructions given in class.
 
+After the classroom tour, use [Official MonoGame and 3D Platformer Resources](Assessment-1-MonoGame/docs/OFFICIAL_MONOGAME_RESOURCES.md) for the original project, official development livestreams, focused tutorials, and reference documentation.
+
 The MonoGame project is a pinned and tested course snapshot of the official [MonoGame Starter Kit 3D Platformer](https://github.com/MonoGame/Starter-Kit-3D-Platformer). It will not move automatically when the upstream project changes.
 
 ## Assessment 2 is not released yet
