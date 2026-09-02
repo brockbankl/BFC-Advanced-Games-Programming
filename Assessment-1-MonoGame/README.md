@@ -22,6 +22,37 @@ For a guided route through the official project materials, videos, MonoGame conc
 
 The **MonoGame for VS Code** community extension and the MonoGame project templates are useful when creating traditional MonoGame projects, but they are not required to build this starter kit. This kit uses MonoGame 3.8.5's newer Content Builder project. On a personal macOS or Linux computer, you will launch the `DesktopGL` project rather than the Windows-only `WindowsDX` project.
 
+## First time on a new or reset college PC
+
+The setup files prepare the development tools this project needs. They can install Visual Studio Code and the .NET 10 **SDK** (the compiler and build tools) into your own Windows account when college policy allows, so they do not need administrator access. It is safe to run setup again: it checks what is already available and reuses downloads where it can.
+
+Read the terminal window while setup works. Its labels mean:
+
+- `[CHECK]`: looking for a tool or requirement.
+- `[INFO]`: explaining the next step.
+- `[PASS]`: a step completed successfully.
+- `[WARN]`: setup can continue, but something needs attention.
+- `[FAIL]`: setup stopped; leave the window open and show the message to your lecturer or college IT.
+
+### Route A: easiest Windows route
+
+1. Extract or clone the repository into `Documents\projects` as explained in the next section.
+2. In File Explorer, open the `Assessment-1-MonoGame` folder.
+3. Double-click `Setup-Assessment1.cmd`.
+4. A terminal window opens. A terminal is a text interface used to give development tools instructions.
+5. Let setup complete and read the result. Do not close the window if it shows `[FAIL]`.
+6. When it succeeds, open the same folder in Visual Studio Code, select **WindowsDX**, then press `F5`, or run the game using the command shown by setup.
+
+### Route B: run setup from Visual Studio Code
+
+If Visual Studio Code is already installed, open the `Assessment-1-MonoGame` folder. Select **Terminal > New Terminal**. The line shown there is the prompt; it tells you which folder commands will use. Run:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\Setup-Assessment1.ps1
+```
+
+PowerShell is Windows' command language. The command starts this one setup script without loading unrelated profile customisations; its execution-policy override applies only to that process and does not change your PC's security settings. Once VS Code is open, **Terminal > Run Task > BFC: Setup Assessment 1** is an alternative.
+
 ## Quick setup (recommended)
 
 After cloning or extracting the course copy, open the `Assessment-1-MonoGame` folder directly in Visual Studio Code. Open its integrated terminal and run:
@@ -30,7 +61,7 @@ After cloning or extracting the course copy, open the `Assessment-1-MonoGame` fo
 powershell -NoProfile -ExecutionPolicy Bypass -File .\Setup-Assessment1.ps1
 ```
 
-The script identifies the correct project folder, selects `WindowsDX` on Windows or `DesktopGL` on macOS/Linux, checks for a .NET 10 SDK, installs it for the current Windows user from Microsoft's official installer when needed, checks the two recommended VS Code extensions, restores dependencies, and builds the selected desktop project. It does not require administrator rights and is safe to run again after an interruption.
+The script identifies the correct project folder, selects `WindowsDX` on Windows or `DesktopGL` on macOS/Linux, checks for Visual Studio Code and .NET 10, installs them for the current Windows user from official sources when needed, prepares the two recommended VS Code extensions, restores dependencies, and builds the selected desktop project. It does not require administrator rights and is safe to run again after an interruption.
 
 The command uses PowerShell's process-only execution-policy override; it does not change your machine settings. The included script is also directly available as `Setup-Assessment1.ps1`. If you prefer a double-clickable route on Windows, run:
 
