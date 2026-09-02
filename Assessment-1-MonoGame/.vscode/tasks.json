@@ -1,131 +1,41 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-//#if (IncludeDesktopVK)
-        {
-            "label": "build-platformer-DesktopVK",
-            "type": "shell",
-            "command": "dotnet",
-            "args": [
-                "build",
-                "${workspaceFolder}/DesktopVK/Platformer3D.csproj"
-            ],
-            "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared",
-                "showReuseMessage": true,
-                "clear": false
-            },
-            "problemMatcher": "$msCompile"
-        },
-//#endif
-//#if (IncludeDesktopGL)
-        {
-            "label": "build-platformer-DesktopGL",
-            "type": "shell",
-            "command": "dotnet",
-            "args": [
-                "build",
-                "${workspaceFolder}/DesktopGL/Platformer3D.csproj"
-            ],
-            "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared",
-                "showReuseMessage": true,
-                "clear": false
-            },
-            "problemMatcher": "$msCompile"
-        },
-//#endif
-//#if (IncludeWindowsDX12)
-        {
-            "label": "build-platformer-WindowsDX12",
-            "type": "shell",
-            "command": "dotnet",
-            "args": [
-                "build",
-                "${workspaceFolder}/WindowsDX12/Platformer3D.csproj"
-            ],
-            "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared",
-                "showReuseMessage": true,
-                "clear": false
-            },
-            "problemMatcher": "$msCompile"
-        },
-//#endif
-//#if (IncludeWindowsDX)
-        {
-            "label": "build-platformer-WindowsDX",
-            "type": "shell",
-            "command": "dotnet",
-            "args": [
-                "build",
-                "${workspaceFolder}/WindowsDX/Platformer3D.csproj"
-            ],
-            "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared",
-                "showReuseMessage": true,
-                "clear": false
-            },
-            "problemMatcher": "$msCompile"
-        },
-//#endif
-//#if (IncludeAndroid)
-        {
-            "label": "build-platformer-android",
-            "type": "shell",
-            "command": "dotnet",
-            "args": [
-                "build",
-                "${workspaceFolder}/Android/Platformer3D.csproj",
-                "-t:Run",
-                "/property:Configuration=Debug"
-            ],
-            "group": "build",
-            "presentation": {
-                "reveal": "silent",
-                "panel": "shared"
-            },
-            "problemMatcher": "$msCompile"
-        },
-//#endif
-//#if (IncludeIOS)
-        {
-            "label": "build-platformer-ios",
-            "type": "shell",
-            "command": "dotnet",
-            "args": [
-                "build",
-                "${workspaceFolder}/iOS/Platformer3D.csproj",
-                "-t:Run",
-                "/property:Configuration=Debug"
-            ],
-            "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared",
-                "showReuseMessage": true,
-                "clear": false
-            },
-            "problemMatcher": "$msCompile"
-        },
-//#endif
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "BFC: Setup Assessment 1",
+      "type": "shell",
+      "command": "powershell",
+      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}\\Setup-Assessment1.ps1"],
+      "problemMatcher": []
+    },
+    {
+      "label": "BFC: Build WindowsDX",
+      "type": "shell",
+      "command": "dotnet",
+      "args": ["build", "${workspaceFolder}/WindowsDX/Platformer3D.csproj"],
+      "group": {"kind": "build", "isDefault": true},
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "BFC: Build DesktopGL",
+      "type": "shell",
+      "command": "dotnet",
+      "args": ["build", "${workspaceFolder}/DesktopGL/Platformer3D.csproj"],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "BFC: Run WindowsDX",
+      "type": "shell",
+      "command": "dotnet",
+      "args": ["run", "--project", "${workspaceFolder}/WindowsDX/Platformer3D.csproj"],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "BFC: Run DesktopGL",
+      "type": "shell",
+      "command": "dotnet",
+      "args": ["run", "--project", "${workspaceFolder}/DesktopGL/Platformer3D.csproj"],
+      "problemMatcher": "$msCompile"
+    }
+  ]
 }

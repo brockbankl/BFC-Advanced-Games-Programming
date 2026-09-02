@@ -17,7 +17,7 @@ During the first part of the module, work only in [`Assessment-1-MonoGame`](Asse
 
 1. Read its [setup guide](Assessment-1-MonoGame/README.md) completely.
 2. Open the `Assessment-1-MonoGame` folder directly in Visual Studio Code.
-3. Complete the .NET restore and DesktopGL build checks before the first practical.
+3. Run the Assessment 1 setup and WindowsDX build check before the first practical.
 4. Follow the version-control and submission instructions given in class.
 
 After the classroom tour, use [Official MonoGame and 3D Platformer Resources](Assessment-1-MonoGame/docs/OFFICIAL_MONOGAME_RESOURCES.md) for the original project, official development livestreams, focused tutorials, and reference documentation.
