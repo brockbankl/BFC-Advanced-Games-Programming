@@ -1,5 +1,5 @@
-# Lecturer-only checkouts, lesson branches, solutions, and working files.
-# Never force-add this directory to the student-facing repository.
+# Local teaching files are intentionally excluded from the student repository.
+# Never force-add this directory.
 _teacher/
 
 # Local editor and operating-system files.

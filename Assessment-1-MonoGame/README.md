@@ -14,14 +14,37 @@ For a guided route through the official project materials, videos, MonoGame conc
 
 - A college Windows PC or a personal Windows, macOS, or Linux computer with Visual Studio Code.
 - Access to Visual Studio Code's integrated terminal. You do **not** need access to the separate Windows Terminal, Command Prompt, or PowerShell applications.
-- The **.NET 9 SDK** or a later supported SDK. The project currently targets `net9.0`.
+- The **.NET 10 SDK**. The project targets `net10.0` and the recommended setup command can install it for the current Windows user when college policy allows.
 - Git, if you use the recommended clone method. A ZIP download is available as a fallback.
 - These Visual Studio Code extensions:
   - **C# Dev Kit** by Microsoft (`ms-dotnettools.csdevkit`). This also installs the base C# extension.
   - **HLSL Tools** by Tim Jones (`timgjones.hlsltools`).
-  - **Blender Development** by Jacques Lucke (`jacqueslucke.blender-development`) is optional until we edit levels in Blender.
 
 The **MonoGame for VS Code** community extension and the MonoGame project templates are useful when creating traditional MonoGame projects, but they are not required to build this starter kit. This kit uses MonoGame 3.8.5's newer Content Builder project. On a personal macOS or Linux computer, you will launch the `DesktopGL` project rather than the Windows-only `WindowsDX` project.
+
+## Quick setup (recommended)
+
+After cloning or extracting the course copy, open the `Assessment-1-MonoGame` folder directly in Visual Studio Code. Open its integrated terminal and run:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\Setup-Assessment1.ps1
+```
+
+The script identifies the correct project folder, selects `WindowsDX` on Windows or `DesktopGL` on macOS/Linux, checks for a .NET 10 SDK, installs it for the current Windows user from Microsoft's official installer when needed, checks the two recommended VS Code extensions, restores dependencies, and builds the selected desktop project. It does not require administrator rights and is safe to run again after an interruption.
+
+The command uses PowerShell's process-only execution-policy override; it does not change your machine settings. The included script is also directly available as `Setup-Assessment1.ps1`. If you prefer a double-clickable route on Windows, run:
+
+```text
+Setup-Assessment1.cmd
+```
+
+Alternatively, choose **Terminal > Run Task** and select **BFC: Setup Assessment 1**. The setup only reports completion after its build succeeds. On Windows, launch the game afterwards with:
+
+```powershell
+dotnet run --project ./WindowsDX/Platformer3D.csproj
+```
+
+On macOS or Linux, use `dotnet run --project ./DesktopGL/Platformer3D.csproj`. The manual route below remains useful when diagnosing a specific problem.
 
 ## 1. Use `Documents\projects` on a college PC
 
@@ -63,7 +86,7 @@ Open Visual Studio Code's integrated terminal using **Terminal > New Terminal** 
 dotnet --list-sdks
 ```
 
-You need to see a line beginning with `9.0` or a later compatible SDK such as `10.0`.
+You need to see a line beginning with `10.0`.
 
 If `dotnet` is not recognised, or only .NET 8 and earlier are listed, stop and tell your lecturer or college IT. Installing Visual Studio Code's **.NET Install Tool** extension does not guarantee that the full SDK needed to build the game is installed.
 
@@ -100,7 +123,7 @@ The correct Assessment 1 folder contains `Platformer3D.slnx`, `Source`, `Content
 
 The ZIP method runs the game, but it does not include Git history. Use the clone method when possible.
 
-## 5. Restore and build for the first time
+## 5. Manual restore and build for the first time
 
 Open the `Assessment-1-MonoGame` folder in Visual Studio Code, then open its integrated terminal using **Terminal > New Terminal** or ``Ctrl+` ``. The terminal prompt should end in `Assessment-1-MonoGame`.
 
@@ -281,7 +304,7 @@ Check that a web page opens, then retry the failed restore once. If it still fai
 
 ### `dotnet` is missing or no compatible SDK is listed
 
-The .NET SDK is a machine prerequisite. Report the PC number and the output of `dotnet --list-sdks` to your lecturer or college IT.
+Run `powershell -NoProfile -ExecutionPolicy Bypass -File .\Setup-Assessment1.ps1` first. It can install .NET 10 for your current Windows user without administrator rights when college policy permits. If that bootstrap fails, report the PC number and the complete error to your lecturer or college IT.
 
 ### C# has no IntelliSense or F5 configurations
 
