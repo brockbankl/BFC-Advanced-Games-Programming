@@ -11,8 +11,8 @@
     {
       "label": "BFC: Run Tank Arena",
       "type": "shell",
-      "command": "npm.cmd",
-      "args": ["start"],
+      "command": "powershell.exe",
+      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}\\Run-Assessment2.ps1", "start"],
       "isBackground": true,
       "group": { "kind": "build", "isDefault": true },
       "problemMatcher": []
@@ -20,8 +20,8 @@
     {
       "label": "BFC: Test Assessment 2",
       "type": "shell",
-      "command": "npm.cmd",
-      "args": ["test"],
+      "command": "powershell.exe",
+      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}\\Run-Assessment2.ps1", "test"],
       "problemMatcher": []
     }
   ]

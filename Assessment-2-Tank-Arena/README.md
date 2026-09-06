@@ -30,7 +30,7 @@ The setup labels mean:
 2. Double-click `Setup-Assessment2.cmd`.
 3. Read the terminal window while it works. Do not close it if it shows `[FAIL]`.
 4. When it says **ASSESSMENT 2 SETUP COMPLETE**, open the same folder in Visual Studio Code.
-5. Choose **Terminal > Run Task > BFC: Run Tank Arena**, or open a new integrated terminal and run `npm start`.
+5. Choose **Terminal > Run Task > BFC: Run Tank Arena**, or open a new integrated PowerShell terminal and run `powershell -NoProfile -ExecutionPolicy Bypass -File .\Run-Assessment2.ps1 start`.
 
 The `.cmd` file only starts the checked PowerShell script in the same folder. Its execution-policy override applies to that one process; it does not alter Windows security settings. The window stays open after a double-click so you can read the result.
 
@@ -42,7 +42,7 @@ Open the `Assessment-2-Tank-Arena` folder directly in Visual Studio Code. Choose
 powershell -NoProfile -ExecutionPolicy Bypass -File .\Setup-Assessment2.ps1
 ```
 
-The terminal prompt should end in `Assessment-2-Tank-Arena`. This workspace opens **Command Prompt** by default because it reliably runs Node's `npm.cmd` on college PCs with restrictive PowerShell script policy. **Terminal > Run Task > BFC: Setup Assessment 2** is an equivalent route. If setup has just installed Node, open a new terminal afterwards (or restart VS Code) so it reads the updated user PATH.
+The terminal prompt should end in `Assessment-2-Tank-Arena`. Assessment 2 keeps the normal VS Code integrated **PowerShell** workflow used by Assessment 1. **Terminal > Run Task > BFC: Setup Assessment 2** is an equivalent route. The supplied Run/Test tasks and `Run-Assessment2.ps1` find the pinned BFC Node installation directly, so they still work if college policy prevents saving the user PATH.
 
 ### What the setup script does
 
@@ -52,7 +52,7 @@ On Windows x64 or ARM64, setup looks for a suitable Node 22 first. If it cannot 
 %LOCALAPPDATA%\BFC-AGP\node\v22.23.2\x64
 ```
 
-(`arm64` replaces `x64` on ARM Windows.) The verified ZIP is cached in `%LOCALAPPDATA%\BFC-AGP\node-cache` for reuse. The script adds only this folder to the existing **user** PATH, without replacing the rest of it, so future Command Prompt/VS Code terminals can find `node`, `npm` and `npx`. It works in the current setup process immediately even when policy prevents saving the user PATH. The workspace deliberately defaults its terminal to Command Prompt: it uses Node's normal `.cmd` launchers and does not require relaxing PowerShell execution policy.
+(`arm64` replaces `x64` on ARM Windows.) The verified ZIP is cached in `%LOCALAPPDATA%\BFC-AGP\node-cache` for reuse. The script attempts to add only this folder to the existing **user** PATH, without replacing the rest of it, as an optional convenience for future Command Prompt/VS Code terminals. The normal supplied workflow does **not** depend on this succeeding: `Run-Assessment2.ps1` and the VS Code Run/Test tasks call the pinned `node.exe`/`npm.cmd` directly. No PowerShell execution-policy setting needs to be changed.
 
 Setup then runs `npm ci`, `npm test`, `npm run check`, and a short local `/health` check. The temporary test server is stopped automatically. It is safe to run again: a working user-local Node copy and a verified archive are reused, while `npm ci` ensures project packages match the committed lockfile.
 
@@ -67,20 +67,20 @@ If the official download is blocked by college policy or the network is unavaila
 ## Run the game
 
 ```powershell
-npm start
+powershell -NoProfile -ExecutionPolicy Bypass -File .\Run-Assessment2.ps1 start
 ```
 
-Then open [http://localhost:3000](http://localhost:3000). Stop the server with `Ctrl+C` in the terminal. Setup already runs `npm ci`, which installs exactly the versions recorded in `package-lock.json`. `npm test` runs server-side logic tests, and `npm run check` checks JavaScript syntax without starting a browser.
+Then open [http://localhost:3000](http://localhost:3000). Stop the server with `Ctrl+C` in the terminal. Setup already runs `npm ci`, which installs exactly the versions recorded in `package-lock.json`. Use `Run-Assessment2.ps1 test` or **BFC: Test Assessment 2** for the server-side tests. `npm start` remains available as a convenience only where the computer's PATH and PowerShell policy allow it.
 
 ### VS Code shortcuts
 
-No extension is required for the supplied vanilla JavaScript/Node baseline; modern VS Code includes JavaScript and Node debugging support. Open **Terminal > Run Task** to use:
+No extension is required for the supplied vanilla JavaScript/Node baseline. Open **Terminal > Run Task** to use:
 
 - **BFC: Setup Assessment 2** — run the safe rerunnable bootstrap.
 - **BFC: Run Tank Arena** — start the server in an integrated terminal.
 - **BFC: Test Assessment 2** — run the automated server-side tests.
 
-You can also open **Run and Debug**, select **Tank Arena server (Node 22)**, then press `F5` to debug the server. Complete setup first. If you deliberately open a PowerShell terminal and `npm` is blocked by policy, use `npm.cmd start`; do not change the execution policy.
+The supplied tasks intentionally use the BFC Node installation directly, including on a reset machine where the user PATH cannot be changed. Complete setup first.
 
 ### Controls
 
@@ -91,7 +91,7 @@ You can also open **Run and Debug**, select **Tank Arena server (Node 22)**, the
 
 ## Test locally before changing anything
 
-1. Start the server with `npm start`.
+1. Start the server with **BFC: Run Tank Arena** or `Run-Assessment2.ps1 start`.
 2. Open `http://localhost:3000` in one normal browser window. Enter a name, choose **Create room**, and note the code.
 3. Open an incognito/private browser window (or a second browser). This gives you a separate connection.
 4. Visit the same address, enter a different name and choose **Join room** with the code.
@@ -138,7 +138,7 @@ This baseline intentionally stores rooms only in memory. A redeploy, restart or 
 
 ### `node` or `npm` is not recognised
 
-Run `Setup-Assessment2.cmd` first. If it has just installed Node, close and reopen the VS Code terminal (or restart VS Code) so it receives the updated user PATH. If the command is still unavailable, rerun setup and keep its full error visible. Do not download Node from an unofficial site or change machine-wide PATH/security settings.
+Use **BFC: Setup Assessment 2** first, then use the supplied **BFC: Run Tank Arena** and **BFC: Test Assessment 2** tasks. They do not require `node` or `npm` to be on PATH. If you choose to use `npm` manually and it is unavailable, that only means the optional user PATH update was blocked; use `Run-Assessment2.ps1` instead. Do not change machine-wide PATH/security settings.
 
 ### `npm ci` says the lock file is out of date
 
