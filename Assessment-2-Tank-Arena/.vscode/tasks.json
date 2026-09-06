@@ -1,0 +1,18 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "BFC: Setup Assessment 2",
+      "type": "shell",
+      "command": "powershell",
+      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}\\Setup-Assessment2.ps1"],
+      "problemMatcher": []
+    },
+    {
+      "label": "BFC: Start Tank Arena",
+      "type": "npm",
+      "script": "start",
+      "problemMatcher": []
+    }
+  ]
+}
