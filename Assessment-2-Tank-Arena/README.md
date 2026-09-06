@@ -4,42 +4,83 @@ Tank Arena is a small browser-based, real-time multiplayer game for Advanced Gam
 
 Two to four people can join a short-code room, drive tanks, aim with a mouse, fire projectiles and see scores, damage, deaths and respawns. The server is authoritative: browsers send input, while the Node.js server decides positions, collisions, damage and scores.
 
-## What you need
+## First time on a new or reset college PC
 
-- [Node.js 22](https://nodejs.org/en/download) (the runtime that runs the server and npm).
-- npm, which is installed with Node and downloads the two project libraries listed in `package.json`.
-- Visual Studio Code and its integrated terminal. Administrator rights are not required to run this project.
-- Git if you use the recommended clone-and-push workflow.
+You need Visual Studio Code and Git if you use the recommended clone-and-push workflow. You do **not** need to install Node.js first: the recommended Windows setup installs the course-pinned Node.js 22 runtime into your own user account when it is missing. npm is included with Node and downloads the two project libraries recorded in `package-lock.json`.
 
-Use **Node 22**, not an old Node version. In the `Assessment-2-Tank-Arena` folder, check it with:
+For consistency with Assessment 1, clone or extract the course repository beneath:
 
-```powershell
-node --version
-npm --version
+```text
+C:\Users\your-college-login\Documents\projects
 ```
 
-`HTTP` is the ordinary web request that delivers the page, CSS and JavaScript. A `WebSocket` is the long-lived two-way connection that the page keeps open afterwards for game messages. `localhost` means “this same computer”, so `http://localhost:3000` works without putting your game online.
+Tank Arena itself does not technically require that location, but using the same location for both assessments avoids opening or editing the wrong copy on a reset college PC. Do not work directly from Downloads, a USB drive or a OneDrive-synchronised temporary copy. If your Documents folder is redirected or unavailable, ask your lecturer which approved location to use.
 
-## First setup
+The setup labels mean:
 
-Open **this folder** (`Assessment-2-Tank-Arena`) in Visual Studio Code, then choose **Terminal > New Terminal**. The prompt should end in `Assessment-2-Tank-Arena`.
+- `[CHECK]`: checking a requirement.
+- `[INFO]`: explaining the next step.
+- `[PASS]`: a completed step.
+- `[WARN]`: setup can continue, but something needs attention.
+- `[FAIL]`: setup stopped; leave the complete message visible for your lecturer or IT.
+
+### Route A: easiest Windows route
+
+1. In File Explorer, open the `Assessment-2-Tank-Arena` folder.
+2. Double-click `Setup-Assessment2.cmd`.
+3. Read the terminal window while it works. Do not close it if it shows `[FAIL]`.
+4. When it says **ASSESSMENT 2 SETUP COMPLETE**, open the same folder in Visual Studio Code.
+5. Choose **Terminal > Run Task > BFC: Run Tank Arena**, or open a new integrated terminal and run `npm start`.
+
+The `.cmd` file only starts the checked PowerShell script in the same folder. Its execution-policy override applies to that one process; it does not alter Windows security settings. The window stays open after a double-click so you can read the result.
+
+### Route B: from Visual Studio Code
+
+Open the `Assessment-2-Tank-Arena` folder directly in Visual Studio Code. Choose **Terminal > New Terminal** and run:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\Setup-Assessment2.ps1
 ```
 
-That script checks Node/npm, installs the locked dependencies and runs the automated checks. Its execution-policy setting applies only to this one process; it does not change computer-wide security settings. You can run it repeatedly. For a double-click route on Windows, use `Setup-Assessment2.cmd`.
+The terminal prompt should end in `Assessment-2-Tank-Arena`. This workspace opens **Command Prompt** by default because it reliably runs Node's `npm.cmd` on college PCs with restrictive PowerShell script policy. **Terminal > Run Task > BFC: Setup Assessment 2** is an equivalent route. If setup has just installed Node, open a new terminal afterwards (or restart VS Code) so it reads the updated user PATH.
 
-If Node is missing, install the current Node **22 LTS** release using the official link above, then completely close and reopen VS Code so its terminal receives the updated path. On a restricted college PC, do not improvise a machine-wide installation: keep the `[FAIL]` message visible and ask your lecturer or IT team for the official route.
+### What the setup script does
+
+On Windows x64 or ARM64, setup looks for a suitable Node 22 first. If it cannot find one, it downloads the official Node.js `v22.23.2` ZIP directly from `nodejs.org`, verifies its published SHA-256 checksum, and extracts it without administrator rights to:
+
+```text
+%LOCALAPPDATA%\BFC-AGP\node\v22.23.2\x64
+```
+
+(`arm64` replaces `x64` on ARM Windows.) The verified ZIP is cached in `%LOCALAPPDATA%\BFC-AGP\node-cache` for reuse. The script adds only this folder to the existing **user** PATH, without replacing the rest of it, so future Command Prompt/VS Code terminals can find `node`, `npm` and `npx`. It works in the current setup process immediately even when policy prevents saving the user PATH. The workspace deliberately defaults its terminal to Command Prompt: it uses Node's normal `.cmd` launchers and does not require relaxing PowerShell execution policy.
+
+Setup then runs `npm ci`, `npm test`, `npm run check`, and a short local `/health` check. The temporary test server is stopped automatically. It is safe to run again: a working user-local Node copy and a verified archive are reused, while `npm ci` ensures project packages match the committed lockfile.
+
+The project uses Node 22 for reproducible teaching. If Node 23 or later is already installed, setup deliberately uses the pinned user-local Node 22 copy instead of silently changing the course runtime.
+
+### Manual fallback
+
+If the official download is blocked by college policy or the network is unavailable and no verified archive is cached, setup explains the failure and stops. Do not try to change execution policy, firewall settings or install Node system-wide. Instead, install Node **22** using the [official Node.js download page](https://nodejs.org/en/download), reopen VS Code, and run setup again. Keep the complete `[FAIL]` message and PC number for your lecturer or college IT if that route is unavailable.
+
+`HTTP` is the ordinary web request that delivers the page, CSS and JavaScript. A `WebSocket` is the long-lived two-way connection that the page keeps open afterwards for game messages. `localhost` means “this same computer”, so `http://localhost:3000` works without putting your game online.
 
 ## Run the game
 
 ```powershell
-npm ci
 npm start
 ```
 
-Then open [http://localhost:3000](http://localhost:3000). Stop the server with `Ctrl+C` in the terminal. `npm ci` installs exactly the versions recorded in `package-lock.json`; use it for a fresh course copy. `npm test` runs server-side logic tests, and `npm run check` checks JavaScript syntax without starting a browser.
+Then open [http://localhost:3000](http://localhost:3000). Stop the server with `Ctrl+C` in the terminal. Setup already runs `npm ci`, which installs exactly the versions recorded in `package-lock.json`. `npm test` runs server-side logic tests, and `npm run check` checks JavaScript syntax without starting a browser.
+
+### VS Code shortcuts
+
+No extension is required for the supplied vanilla JavaScript/Node baseline; modern VS Code includes JavaScript and Node debugging support. Open **Terminal > Run Task** to use:
+
+- **BFC: Setup Assessment 2** — run the safe rerunnable bootstrap.
+- **BFC: Run Tank Arena** — start the server in an integrated terminal.
+- **BFC: Test Assessment 2** — run the automated server-side tests.
+
+You can also open **Run and Debug**, select **Tank Arena server (Node 22)**, then press `F5` to debug the server. Complete setup first. If you deliberately open a PowerShell terminal and `npm` is blocked by policy, use `npm.cmd start`; do not change the execution policy.
 
 ### Controls
 
@@ -97,7 +138,7 @@ This baseline intentionally stores rooms only in memory. A redeploy, restart or 
 
 ### `node` or `npm` is not recognised
 
-Node 22 is absent or VS Code was opened before it was installed. Install it through the approved route, close all VS Code windows, reopen this folder and rerun setup. Do not download Node from an unofficial site.
+Run `Setup-Assessment2.cmd` first. If it has just installed Node, close and reopen the VS Code terminal (or restart VS Code) so it receives the updated user PATH. If the command is still unavailable, rerun setup and keep its full error visible. Do not download Node from an unofficial site or change machine-wide PATH/security settings.
 
 ### `npm ci` says the lock file is out of date
 

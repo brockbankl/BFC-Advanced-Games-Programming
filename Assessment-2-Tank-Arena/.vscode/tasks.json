@@ -9,9 +9,19 @@
       "problemMatcher": []
     },
     {
-      "label": "BFC: Start Tank Arena",
-      "type": "npm",
-      "script": "start",
+      "label": "BFC: Run Tank Arena",
+      "type": "shell",
+      "command": "npm.cmd",
+      "args": ["start"],
+      "isBackground": true,
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "BFC: Test Assessment 2",
+      "type": "shell",
+      "command": "npm.cmd",
+      "args": ["test"],
       "problemMatcher": []
     }
   ]
