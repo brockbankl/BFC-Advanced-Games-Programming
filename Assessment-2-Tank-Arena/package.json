@@ -1,0 +1,19 @@
+{
+  "name": "bfc-assessment-2-tank-arena",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A browser-based, server-authoritative multiplayer tank arena teaching baseline.",
+  "type": "module",
+  "engines": {
+    "node": ">=22 <23"
+  },
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "node --test",
+    "check": "node --check server/server.js && node --check public/js/client.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "ws": "^8.18.0"
+  }
+}
