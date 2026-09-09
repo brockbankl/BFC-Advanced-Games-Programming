@@ -110,8 +110,23 @@ function updateAim(event) {
 }
 
 const keyBindings = { KeyW: "up", ArrowUp: "up", KeyS: "down", ArrowDown: "down", KeyA: "left", ArrowLeft: "left", KeyD: "right", ArrowRight: "right" };
-window.addEventListener("keydown", (event) => { if (keyBindings[event.code]) { input[keyBindings[event.code]] = true; event.preventDefault(); } if (event.code === "Space" && !gameArea.hidden) { send({ type: "fire" }); event.preventDefault(); } });
-window.addEventListener("keyup", (event) => { if (keyBindings[event.code]) { input[keyBindings[event.code]] = false; event.preventDefault(); } });
+function isEditableTarget(target) {
+  return target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target.isContentEditable;
+}
+
+function canUseGameKeyboard(event) {
+  return !gameArea.hidden && !isEditableTarget(event.target);
+}
+
+window.addEventListener("keydown", (event) => {
+  if (!canUseGameKeyboard(event)) return;
+  if (keyBindings[event.code]) { input[keyBindings[event.code]] = true; event.preventDefault(); }
+  if (event.code === "Space") { send({ type: "fire" }); event.preventDefault(); }
+});
+window.addEventListener("keyup", (event) => {
+  if (!canUseGameKeyboard(event)) return;
+  if (keyBindings[event.code]) { input[keyBindings[event.code]] = false; event.preventDefault(); }
+});
 canvas.addEventListener("mousemove", updateAim); canvas.addEventListener("mousedown", (event) => { updateAim(event); send({ type: "fire" }); });
 setInterval(() => { if (!gameArea.hidden) send({ type: "input", input }); }, 50);
 createButton.addEventListener("click", () => join(true)); joinButton.addEventListener("click", () => join(false)); roomInput.addEventListener("input", () => { roomInput.value = roomInput.value.toUpperCase().replace(/[^A-Z2-9]/g, ""); });
