@@ -61,7 +61,7 @@ After cloning or extracting the course copy, open the `Assessment-1-MonoGame` fo
 powershell -NoProfile -ExecutionPolicy Bypass -File .\Setup-Assessment1.ps1
 ```
 
-The script identifies the correct project folder, selects `WindowsDX` on Windows or `DesktopGL` on macOS/Linux, checks for Visual Studio Code and .NET 10, installs them for the current Windows user from official sources when needed, prepares the two recommended VS Code extensions, restores dependencies, and builds the selected desktop project. It does not require administrator rights and is safe to run again after an interruption.
+The script identifies the correct project folder, selects `WindowsDX` on Windows or `DesktopGL` on macOS/Linux, checks for Visual Studio Code and .NET 10, installs them for the current Windows user from official sources when needed, prepares the two recommended VS Code extensions, checks and repairs the user-level NuGet.org source required by MonoGame, restores dependencies, and builds the selected desktop project. It does not require administrator rights and is safe to run again after an interruption.
 
 The command uses PowerShell's process-only execution-policy override; it does not change your machine settings. The included script is also directly available as `Setup-Assessment1.ps1`. If you prefer a double-clickable route on Windows, run:
 
@@ -331,7 +331,20 @@ The game is still running, so Windows has locked the executable while the build 
 
 ### NuGet download or restore errors
 
-Check that a web page opens, then retry the failed restore once. If it still fails, keep the full error visible and tell your lecturer; the college firewall, proxy, or NuGet cache may need support. Do not install packages from unofficial download sites.
+The setup script checks the official NuGet.org source automatically before restoring. If the terminal shows `NU1101: Unable to find package ...` and lists only `Microsoft Visual Studio Offline Packages` or a `.NET` `library-packs` folder, NuGet.org is missing or disabled in that user profile. Run these commands in the integrated terminal, then retry setup:
+
+```powershell
+dotnet nuget list source
+dotnet nuget add source https://api.nuget.org/v3/index.json --name nuget.org
+```
+
+If `nuget.org` is already listed as disabled, enable it instead:
+
+```powershell
+dotnet nuget enable source --name nuget.org
+```
+
+These commands change only the current user's NuGet configuration and do not need administrator rights. If the source is present and enabled but restore still fails, check that a web page opens, then retry once. A firewall, proxy, or blocked NuGet service may still need college IT support; keep the complete error visible. Do not install packages from unofficial download sites.
 
 ### `dotnet` is missing or no compatible SDK is listed
 

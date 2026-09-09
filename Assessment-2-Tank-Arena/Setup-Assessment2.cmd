@@ -10,7 +10,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0Setup-Assessment2.
 set "BFC_SETUP_EXIT=%ERRORLEVEL%"
 echo.
 if "%BFC_SETUP_EXIT%"=="0" (
-    echo Setup finished successfully. Open this folder in VS Code, then run npm start.
+    echo Setup finished successfully. Open this folder in VS Code, then use Terminal -^> Run Task -^> BFC: Run Tank Arena.
+    echo You can also run: powershell -NoProfile -ExecutionPolicy Bypass -File .\Run-Assessment2.ps1 start
 ) else (
     echo Setup stopped with exit code %BFC_SETUP_EXIT%. Keep this window open and show the message to your lecturer or IT.
 )

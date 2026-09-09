@@ -154,6 +154,66 @@ function Invoke-DotNetStep {
     }
 }
 
+function Ensure-NuGetOrgSource {
+    param([Parameter(Mandatory = $true)][string]$DotNetCommand)
+
+    # MonoGame packages are published on nuget.org. A number of managed
+    # college PCs have only the .NET SDK's offline sources enabled, which
+    # produces NU1101 for every MonoGame package. Keep this repair user-level,
+    # repeatable and safe to run on every setup attempt.
+    $sourceUrl = 'https://api.nuget.org/v3/index.json'
+    Write-Status CHECK 'Checking the NuGet.org package source used by MonoGame.'
+
+    $sourceOutput = @(& $DotNetCommand nuget list source 2>&1 | ForEach-Object { [string]$_ })
+    $sourceExitCode = $LASTEXITCODE
+    if ($sourceExitCode -ne 0) {
+        $detail = ($sourceOutput -join ' ').Trim()
+        if ([string]::IsNullOrWhiteSpace($detail)) { $detail = 'the dotnet command did not provide additional details' }
+        throw "Could not inspect NuGet sources: $detail"
+    }
+
+    $urlIndex = -1
+    for ($index = 0; $index -lt $sourceOutput.Count; $index++) {
+        if ($sourceOutput[$index].Trim() -eq $sourceUrl) {
+            $urlIndex = $index
+            break
+        }
+    }
+
+    if ($urlIndex -ge 0) {
+        $sourceName = $null
+        $sourceState = 'Enabled'
+        for ($index = $urlIndex - 1; $index -ge 0 -and $index -ge ($urlIndex - 4); $index--) {
+            if ($sourceOutput[$index] -match '^\s*(?:\d+\.\s*)?(?<name>.+?)\s+\[(?<state>Enabled|Disabled)\]\s*$') {
+                $sourceName = $Matches['name'].Trim()
+                $sourceState = $Matches['state']
+                break
+            }
+        }
+
+        if ($sourceState -eq 'Disabled' -and -not [string]::IsNullOrWhiteSpace($sourceName)) {
+            Write-Status INFO "NuGet.org is registered as '$sourceName' but disabled; enabling it for this user."
+            & $DotNetCommand nuget enable source --name $sourceName
+            if ($LASTEXITCODE -ne 0) {
+                throw "NuGet.org could not be enabled. Run 'dotnet nuget enable source --name $sourceName' and retry setup."
+            }
+        }
+        Write-Status PASS 'NuGet.org source is available for package restore.'
+        return
+    }
+
+    Write-Status INFO 'NuGet.org is not registered. Adding the official source for this user.'
+    $addOutput = @(& $DotNetCommand nuget add source $sourceUrl --name 'nuget.org' 2>&1 | ForEach-Object { [string]$_ })
+    $addExitCode = $LASTEXITCODE
+    if ($addExitCode -ne 0) {
+        $detail = ($addOutput -join ' ').Trim()
+        if ([string]::IsNullOrWhiteSpace($detail)) { $detail = 'the dotnet command did not provide additional details' }
+        throw "NuGet.org could not be added: $detail"
+    }
+
+    Write-Status PASS 'NuGet.org source was added for this user.'
+}
+
 try {
     # Use this file's own folder, so double-clicking works from anywhere.
     $projectRoot = Split-Path -Parent $PSCommandPath
@@ -201,6 +261,8 @@ try {
     else {
         throw 'A .NET 10 SDK is required. Install it from https://dotnet.microsoft.com/download/dotnet/10.0 and run setup again.'
     }
+
+    Ensure-NuGetOrgSource -DotNetCommand $dotnetCommand
 
     $extensions = @{}
     if ($null -ne $vsCode) {
