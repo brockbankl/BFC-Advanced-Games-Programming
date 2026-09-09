@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A small server-authoritative multiplayer tank arena for Advanced Games Programming.">
+  <title>Tank Arena | Advanced Games Programming</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="page-shell">
+    <header><p class="eyebrow">BFC • Advanced Games Programming</p><h1>Tank Arena</h1><p class="subtitle">A small real-time multiplayer networking baseline.</p></header>
+    <section id="lobby" class="panel lobby" aria-labelledby="lobby-title">
+      <h2 id="lobby-title">Enter the arena</h2>
+      <p>Choose a temporary display name. Create a room, then share its four-character code with up to three classmates.</p>
+      <label for="player-name">Display name</label><input id="player-name" maxlength="18" autocomplete="nickname" placeholder="e.g. Alex" value="Player">
+      <div class="lobby-actions"><button id="create-room" class="primary">Create room</button><div class="join-group"><label for="room-code">Room code</label><div><input id="room-code" maxlength="4" autocomplete="off" placeholder="ABCD"><button id="join-room">Join room</button></div></div></div>
+      <p id="lobby-message" class="message" role="status">Connecting…</p>
+    </section>
+    <section id="game-area" hidden>
+      <div class="game-topbar"><span id="room-label">Room —</span><span id="connection-status" class="status">Connecting</span><button id="leave-room" class="quiet">Leave room</button></div>
+      <div class="canvas-wrap"><canvas id="game-canvas" width="960" height="640" aria-label="Tank Arena game"></canvas></div>
+      <div class="below-game"><section class="panel compact"><h2>Controls</h2><p><kbd>WASD</kbd> move · aim with the mouse · <kbd>click</kbd> or <kbd>Space</kbd> fire</p><p>Destroyed tanks respawn after three seconds. The server owns movement, hits, health and scores.</p></section><section class="panel compact"><h2>Scoreboard</h2><ol id="scoreboard" class="scoreboard"></ol></section></div>
+    </section>
+  </main>
+  <script type="module" src="/js/client.js"></script>
+</body>
+</html>

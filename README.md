@@ -9,7 +9,7 @@ The module begins by examining the current games market: how audiences are split
 | Folder | Status | Purpose |
 | --- | --- | --- |
 | [`Assessment-1-MonoGame`](Assessment-1-MonoGame/) | **Current** | Cross-platform 3D MonoGame work: HLSL shaders, particles, rendering, profiling, and optimisation. |
-| [`Assessment-2-RPS`](Assessment-2-RPS/) | **Not released** | Python Rock-Paper-Scissors networking work. This material is still being prepared and may change. |
+| [`Assessment-2-Tank-Arena`](Assessment-2-Tank-Arena/) | **Teaching baseline** | Browser-based, server-authoritative multiplayer Tank Arena: Node.js, WebSockets, Canvas and ephemeral rooms. |
 
 ## Start here: Assessment 1
 
@@ -24,13 +24,13 @@ After the classroom tour, use [Official MonoGame and 3D Platformer Resources](As
 
 The MonoGame project is a pinned and tested course snapshot of the official [MonoGame Starter Kit 3D Platformer](https://github.com/MonoGame/Starter-Kit-3D-Platformer). It will not move automatically when the upstream project changes.
 
-## Assessment 2 is not released yet
+## Assessment 2: multiplayer Tank Arena
 
-Do **not** begin, copy, modify, or base assessed work on `Assessment-2-RPS` until your lecturer announces its release in class.
+Assessment 2 uses the [Tank Arena networking baseline](Assessment-2-Tank-Arena/). It is a small playable browser game supplied to support later work on client/server architecture, JSON protocols, server authority, validation, disconnections, latency and multiplayer identity.
 
-The folder is present only to establish the eventual module structure. Its protocol, starter code, dependencies, and assessment instructions are subject to change. Work completed against this draft may be incompatible with the released exercise and will not count as early completion of Assessment 2.
+Read the [Tank Arena setup and running guide](Assessment-2-Tank-Arena/README.md) before opening it. The project includes a student-safe setup script, server-side automated tests, local two-player instructions and a Render deployment walkthrough. It is starter material, not the eventual assessment brief: follow your lecturer's release and submission instructions.
 
-For now, keep your attention on the market analysis, cross-platform rationale, MonoGame rendering pipeline, HLSL work, particle effects, and evidence-led optimisation in Assessment 1.
+Assessment 1 and Assessment 2 use different technology for different learning goals. Do not mix their setup routes or edit the Assessment 1 MonoGame implementation while working on Tank Arena.
 
 ## Licensing and provenance
 
